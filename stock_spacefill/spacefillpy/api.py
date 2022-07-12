@@ -13,8 +13,6 @@ import pdb
 from urllib import response
 import six
 import logging
-import sentry_sdk
-import pdb
 
 
 try:
