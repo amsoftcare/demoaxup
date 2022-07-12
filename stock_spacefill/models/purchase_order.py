@@ -68,7 +68,9 @@ class PurchaseOrder(models.Model):
                 order_lines_values
             )
         order_values.update({"order_items": order_items})       
-        instance.create(instance.url+item_url, order_values)
+        res= instance.create(instance.url+item_url, order_values)
+        picking.write({'order_spacefill_id' : res.get('id')})
+        picking.write({'status_spacefill' : res.get('status')})
     
     def export_order_entry_in_spacefill(self,picking):
             instance,setup = self.get_instance_spacefill()

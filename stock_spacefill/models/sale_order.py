@@ -10,7 +10,7 @@ from datetime import date, datetime
 import pdb
 
 class SaleOrder(models.Model):
-    _inherit = "sale.order"       
+    _inherit = "sale.order"     
 
     def action_confirm(self): 
         res= super(SaleOrder, self).action_confirm() 
@@ -70,8 +70,9 @@ class SaleOrder(models.Model):
                 order_lines_values
             )
         order_values.update({"order_items": order_items})       
-        instance.create(instance.url+item_url, order_values)
-    
+        res= instance.create(instance.url+item_url, order_values)
+        picking.write({'order_spacefill_id' : res.get('id')}) 
+        picking.write({'status_spacefill' :  res.get('status')}) 
     def export_order_exit_in_spacefill(self,picking):
             instance,setup = self.get_instance_spacefill()
             self.create_order_exit_spacefill(instance,picking)

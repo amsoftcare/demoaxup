@@ -14,8 +14,8 @@ from odoo.tools import float_round
 class product_template(models.Model):
     _inherit = 'product.template'
     is_to_be_exported_to_spacefill=fields.Boolean('Synchro SpaceFill',default= False)
-    item_spacefill_id=fields.Char('Uiid Spacefill item')         
+    item_spacefill_id=fields.Char('Spacefill id item')         
 product_template()
 class product_product(models.Model):
     _inherit='product.product'
-    spacefill_product=fields.Boolean('Prestashop Product')
+    spacefill_product=fields.Boolean('Spacefill Product')
